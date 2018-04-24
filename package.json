@@ -1,0 +1,27 @@
+{
+  "name": "bdp-services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "vcs": "node vcs-provider/index.js",
+    "dvcs": "node --inspect vcs-provider/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flaff/bdp-services.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flaff/bdp-services/issues"
+  },
+  "homepage": "https://github.com/flaff/bdp-services#readme",
+  "dependencies": {
+    "chalk": "^2.4.0",
+    "express": "^4.16.3",
+    "git-server": "^0.2.0",
+    "node-git-server": "^0.4.2"
+  }
+}
