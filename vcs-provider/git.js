@@ -3,12 +3,14 @@ const
     path = require('path'),
     GitServer = require('node-git-server'),
     config = require('./config'),
-    {createLogger} = require('./util'),
-    log = createLogger('git');
+    util = require('./util'),
+    log = util.createLogger('git');
 
 const
     authenticate = (type, repository, user, next) => {
+        log(`AUTH ${type} -> ${repository}`);
         user((username, password) => {
+            log(`AUTH ${username} ${password}`);
             next()
         });
     },
@@ -26,7 +28,7 @@ const
     },
 
     onPush = (push) => {
-        log(`PUSH by ${chalk.yellow(push.username)} to ${chalk.yellow(push.repo)} ${shortenRevision(push.last)}->${shortenRevision(push.commit)}`);
+        log(`PUSH by ${chalk.yellow(push.username)} to ${chalk.yellow(push.repo)} ${util.shortenRevision(push.last)}->${util.shortenRevision(push.commit)}`);
         push.accept();
     },
 

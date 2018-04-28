@@ -1,13 +1,15 @@
 const
     fs = require('fs'),
     chalk = require('chalk'),
+    moment = require('moment'),
 
+    TIME_FORMAT = 'HH:mm:ss',
     DEFAULT_DELIMITER = '/',
     GIT_EXTENSION = 'git',
 
     shortenRevision = (fullRevision) => fullRevision.split('').filter((e, i) => i < 7).join(''),
 
-    createLogger = (name) => (message) => console.log(chalk.gray(`[${name}] `) + message),
+    createLogger = (name) => (message) => console.log(chalk.gray(`${moment().format(TIME_FORMAT)} [${name}] `) + message),
 
     awaitPromiseMap = (promiseMap) => new Promise((resolve, reject) => {
         const
@@ -69,6 +71,8 @@ const
         ));
     },
 
+    filterArray = (fn) => (array) => array.filter(fn),
+
     removeExtension = (string) => string.slice(0, -(GIT_EXTENSION.length + 1)),
     removeExtensionsFromArray = (array) => array.map(removeExtension);
 
@@ -80,5 +84,6 @@ module.exports = {
     isARepository,
     removeExtension,
     removeExtensionsFromArray,
+    filterArray,
     flattenObjectToArray
 };
