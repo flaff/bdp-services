@@ -74,16 +74,19 @@ const
     filterArray = (fn) => (array) => array.filter(fn),
 
     removeExtension = (string) => string.slice(0, -(GIT_EXTENSION.length + 1)),
-    removeExtensionsFromArray = (array) => array.map(removeExtension);
+    removeExtensionsFromArray = (array) => array.map(removeExtension),
+
+    finalizeResponse = (response) => (data) => response.send(JSON.stringify(data));
 
 
 module.exports = {
-    deepList,
+    deepDirectoryList: deepList,
     shortenRevision,
     createLogger,
     isARepository,
     removeExtension,
     removeExtensionsFromArray,
     filterArray,
-    flattenObjectToArray
+    flattenObjectToArray,
+    finalizeResponse
 };

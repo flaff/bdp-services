@@ -5,15 +5,17 @@ const
     config = require('../config'),
 
     Mappings = require('./mappings'),
-    {listViews, listRepositories, listProjects, listModels} = require('./list-repositories'),
+    {GETListViews, GETListRepositories, GETListProjects, GETListModels} = require('./repositories/list'),
+    {GETUserHighlight} = require('./user/highlight'),
 
     log = util.createLogger('srv'),
     app = express();
 
-app.get(Mappings.LIST_MODELS_URL, listModels);
-app.get(Mappings.LIST_VIEWS_URL, listViews);
-app.get(Mappings.LIST_PROJECTS_URL, listProjects);
-app.get(Mappings.LIST_REPOSITORIES_URL, listRepositories);
+app.get(Mappings.LIST_MODELS_URL, GETListModels);
+app.get(Mappings.LIST_VIEWS_URL, GETListViews);
+app.get(Mappings.LIST_PROJECTS_URL, GETListProjects);
+app.get(Mappings.LIST_REPOSITORIES_URL, GETListRepositories);
+app.get(Mappings.USER_HIGHLIGHT_URL, GETUserHighlight);
 
 app.listen(config.SERVICES_PORT, () => log(`services started @ localhost:${chalk.cyan(config.SERVICES_PORT)}`));
 
