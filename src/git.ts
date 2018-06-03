@@ -1,10 +1,10 @@
-const
-    chalk = require('chalk'),
-    path = require('path'),
-    GitServer = require('node-git-server'),
-    config = require('./config'),
-    util = require('./util'),
-    log = util.createLogger('git');
+import chalk from 'chalk';
+import path from 'path';
+import GitServer from 'node-git-server';
+import {GIT_PORT} from './config';
+import {createLogger, shortenRevision} from './utils/log';
+
+const log = createLogger('git', chalk.magenta);
 
 const
     authenticate = (type, repository, user, next) => {
@@ -28,18 +28,18 @@ const
     },
 
     onPush = (push) => {
-        log(`PUSH by ${chalk.yellow(push.username)} to ${chalk.yellow(push.repo)} ${util.shortenRevision(push.last)}->${util.shortenRevision(push.commit)}`);
+        log(`PUSH by ${chalk.yellow(push.username)} to ${chalk.yellow(push.repo)} ${shortenRevision(push.last)}->${shortenRevision(push.commit)}`);
         push.accept();
     },
 
     onListen = () => {
         log(`repos are stored in ${chalk.cyan(repositoriesPath)}`);
-        log(`server started @ ${chalk.cyan(`localhost:${config.GIT_PORT}`)}`);
+        log(`Git VCS started @ localhost:{{${GIT_PORT}}}`);
     };
 
 
 git.on('push', onPush);
 git.on('fetch', onFetch);
-git.listen(config.GIT_PORT, onListen);
+git.listen(GIT_PORT, onListen);
 
-module.exports = git;
+export default git;

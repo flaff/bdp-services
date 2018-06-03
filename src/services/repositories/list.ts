@@ -1,6 +1,11 @@
-const
-    util = require('../../util'),
-    git = require('../../git');
+import {
+    deepDirectoryList,
+    filterArray,
+    finalizeResponse,
+    flattenObjectToArray,
+    removeExtensionsFromArray
+} from '../../utils/log';
+import git from '../../git';
 
 const
     MODEL_REGEX = /[^\\/]*[\\/]model[\\/]/,
@@ -14,49 +19,42 @@ const
 
 
     listRepositories = () =>
-        util.deepDirectoryList(git.dirMap())
-            .then(util.flattenObjectToArray)
-            .then(util.removeExtensionsFromArray)
-    ,
+        deepDirectoryList(git.dirMap())
+            .then(flattenObjectToArray)
+            .then(removeExtensionsFromArray),
 
     listProjects = () =>
         listRepositories()
-            .then(util.filterArray(isAProject))
-    ,
+            .then(filterArray(isAProject)),
 
     listViews = () =>
         listRepositories()
-            .then(util.filterArray(isAView))
-    ,
+            .then(filterArray(isAView)),
 
     listModels = () =>
         listRepositories()
-            .then(util.filterArray(isAModel))
-    ,
+            .then(filterArray(isAModel)),
 
 
     GETListRepositories = (request, response) =>
         listRepositories()
-            .then(util.finalizeResponse(response))
-    ,
+            .then(finalizeResponse(response)),
 
     GETListModels = (request, response) =>
         listModels()
-            .then(util.finalizeResponse(response))
-    ,
+            .then(finalizeResponse(response)),
 
     GETListProjects = (request, response) =>
         listProjects()
-            .then(util.finalizeResponse(response))
-    ,
+            .then(finalizeResponse(response)),
 
     GETListViews = (request, response) =>
         listViews()
-            .then(util.finalizeResponse(response))
+            .then(finalizeResponse(response))
     ;
 
 
-module.exports = {
+export {
     isAView,
     isAModel,
     isAProject,

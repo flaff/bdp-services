@@ -1,21 +1,21 @@
+import {getUserByName} from '../../database/operations';
+
 const
-    util = require('../../util'),
-    repos = require('../repositories/list'),
-    provider = require('./data.mock');
+    util = require('../../utils/log'),
+    repos = require('../repositories/list');
 
 
 const
-    getUser = provider.getUserData,
     areReposOfUser = (userName) => (repos) => repos.filter(repos.isARepositoryOfThisUser(userName)),
 
     addReposToHighlight = (highlightResponse, repositories) => {
     },
 
     GETUserHighlight = (request, response) => {
-        getUser(request.params.userName)
+        getUserByName(request.params.userName)
             .then(util.finalizeResponse(response));
     };
 
-module.exports = {
+export {
     GETUserHighlight
 };
