@@ -37,9 +37,9 @@ const
             .then(password => user.password = password)
             .then(() => user),
 
-    compareUserCredentials = (user: UserLoginModel, secondUser: UserModel): Promise<UserLoginModel> =>
-        compare(user.password, secondUser.password)
-            .then((authorized) => authorized ? user : reject(INVALID_PASSWORD_ERROR)),
+    compareUserCredentials = (user: UserLoginModel, foundUser: UserModel): Promise<UserModel> =>
+        compare(user.password, foundUser.password)
+            .then((authorized) => authorized ? foundUser : reject(INVALID_PASSWORD_ERROR)),
 
     generateToken = (user: any): string =>
         sign({name: user.name, id: user._id}, JWT_SALT, JWT_SETTINGS),
@@ -47,6 +47,7 @@ const
     generateUserWithToken = (user: any): AuthUserModel => ({
         name: user.name,
         id: user._id,
+        avatar: user.avatar,
         token: generateToken(user)
     }),
 

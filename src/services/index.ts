@@ -6,7 +6,7 @@ import {SERVICES_PORT} from '../config';
 import Mappings from './mappings';
 import {GETListViews, GETListRepositories, GETListProjects, GETListModels} from './repositories/list';
 import {GETUserHighlight} from './user/highlight';
-import {POSTLoginUser, POSTRegisterUser, CheckAuthorization} from '../auth';
+import {POSTLoginUser, POSTRegisterUser, CheckAuthorization, POSTRestoreUser} from '../auth';
 import {checkContentType} from '../utils/contentType';
 
 const
@@ -20,6 +20,7 @@ connectToDatabase();
 
 app.post(Mappings.LOGIN_URL, checkContentType, POSTLoginUser);
 app.post(Mappings.REGISTER_URL, checkContentType, POSTRegisterUser);
+app.post(Mappings.RESTORE_URL, checkContentType, CheckAuthorization, POSTRestoreUser);
 
 app.get(Mappings.LIST_MODELS_URL, GETListModels);
 app.get(Mappings.LIST_VIEWS_URL, GETListViews);

@@ -9,7 +9,6 @@ const
     getContentTypeHeader = (request) =>
         request.headers[CONTENT_TYPE_HEADER] || request.headers[CONTENT_TYPE_HEADER.toLowerCase()];
 
-
 export const
     checkContentType = (request, response, next) =>
         getContentTypeHeader(request) === 'application/json'

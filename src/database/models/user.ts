@@ -25,4 +25,5 @@ export type AuthUserModel = {
     name: string;
     id: string;
     token: string;
+    avatar?: string;
 };
