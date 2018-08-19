@@ -1,6 +1,6 @@
-import chalk from 'chalk';
-import path from 'path';
-import GitServer from 'node-git-server';
+const chalk = require('chalk');
+const path = require('path');
+const GitServer = require('node-git-server');
 import {GIT_PORT} from './config';
 import {createLogger, shortenRevision} from './utils/log';
 

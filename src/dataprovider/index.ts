@@ -1,7 +1,7 @@
 import {DATA_PROVIDER_PORT, SERVICES_PORT} from '../config';
 import {createLogger} from '../utils/log';
-import express from 'express';
-import chalk from 'chalk';
+const express = require('express');
+const chalk = require('chalk');
 import {GETData} from './getData';
 
 const

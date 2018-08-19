@@ -1,6 +1,7 @@
 import chalk, {Chalk} from 'chalk';
-import fs from 'fs';
-import moment from 'moment';
+const fs = require('fs');
+const moment = require('moment');
+import Promise from 'bluebird';
 import {ServiceException} from './promise';
 
 interface Logger {

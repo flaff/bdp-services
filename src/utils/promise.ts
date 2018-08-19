@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 import {createServiceException} from './exception';
 
 export interface ServiceException<T = any> extends Error {

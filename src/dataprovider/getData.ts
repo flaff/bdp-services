@@ -1,8 +1,8 @@
-import csvToJSON from 'csvtojson';
-import path from 'path';
 import {finalizeResponse, finalizeException} from '../utils';
+const csvToJSON = require('csvtojson');
+const path = require('path');
 
-const fileName = 'daily-minimum-temperatures-in-me.csv';
+const fileName = 'daily-minimum-temperatures.csv';
 
 const GETData = (request, response) =>
     csvToJSON()

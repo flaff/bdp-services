@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import express from 'express';
+const chalk = require('chalk');
+const express = require('express');
 import connectToDatabase from '../database';
 import {createLogger} from '../utils/log';
 import {SERVICES_PORT} from '../config';
